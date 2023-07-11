@@ -26,5 +26,5 @@ A powerful chatbot application built using Next.js and OpenAI, providing an inte
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/nextjs-openai-chatbot.git
+   git clone https://github.com/Vette1123/Next.js-ai-Chat-Bot
    ```
