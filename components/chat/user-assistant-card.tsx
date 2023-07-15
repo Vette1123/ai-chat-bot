@@ -6,6 +6,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
+import { Loader2 } from 'lucide-react'
 
 interface Props {
   isUser: boolean
@@ -22,10 +23,18 @@ function UserAssistantCard({
         'flex items-end justify-end': isUser,
       })}
     >
-      <Card className='w-1/4 border-0'>
+      <Card
+        className={cn('border-0', {
+          'w-full flex justify-end': isUser,
+        })}
+      >
         <CardHeader>
           <CardTitle>{isUser ? 'You' : 'Assistant'}</CardTitle>
-          <CardDescription>{text}</CardDescription>
+          <CardDescription>
+            {text || (
+              <Loader2 className='w-6 h-6 border-4 border-gray-400 rounded-full animate-spin' />
+            )}
+          </CardDescription>
         </CardHeader>
       </Card>
     </div>
