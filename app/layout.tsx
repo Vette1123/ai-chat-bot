@@ -8,9 +8,35 @@ import type { Metadata } from 'next'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Sadge Chat',
-  description: 'Sadge AI Chatbot',
-  keywords: ['sadge', 'chat', 'bot', 'ai', 'artificial', 'intelligence'],
+  title: 'Sadge Chat - Natural Conversational AI',
+  description:
+    'Have natural conversations with Sadge, an empathetic AI chatbot created by Anthropic. Ask Sadge anything!',
+
+  // Keywords
+  keywords: [
+    'ai chatbot',
+    'conversational ai',
+    'anthropic',
+    'natural language',
+    'empathetic ai',
+    'talk to ai',
+    'ai assistant',
+  ],
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://www.chatgptegy.com/',
+    title: 'Sadge Chat - Natural Conversational AI',
+    description:
+      'Have natural conversations with Sadge, an empathetic AI chatbot created by Anthropic. Ask Sadge anything!',
+  },
+  twitter: {
+    // Twitter
+    title: 'Sadge Chat - Natural Conversational AI',
+    description:
+      'Have natural conversations with Sadge, an empathetic AI chatbot created by Anthropic. Ask Sadge anything!',
+    site: 'https://www.chatgptegy.com/',
+  },
 }
 
 export default function RootLayout({
