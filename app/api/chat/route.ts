@@ -6,8 +6,6 @@ import { Configuration, OpenAIApi } from 'openai-edge'
 import { authOptions } from '@/lib/auth-options'
 import { nanoid } from '@/lib/utils'
 
-export const runtime = 'edge'
-
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 })
@@ -17,8 +15,8 @@ const openai = new OpenAIApi(configuration)
 export async function POST(req: Request) {
   const json = await req.json()
   const { messages, previewToken } = json
-  const user = await getServerSession({ req, ...authOptions })
-  const userId = user?.user?.id
+  const session = await getServerSession(authOptions)
+  const userId = session?.user?.id
 
   if (!userId) {
     return new Response('Unauthorized', {
