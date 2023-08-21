@@ -9,6 +9,9 @@ import {
   Twitter,
   User,
 } from 'lucide-react'
+import { nanoid } from 'nanoid'
+
+import { cn } from '@/lib/utils'
 
 export type Icon = LucideIcon
 
@@ -51,6 +54,7 @@ export const Icons = {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 256 256"
       fill="currentColor"
+      className={cn('h-4 w-4', props.className)}
       {...props}
     >
       <path d="m229.66 77.66-128 128a8 8 0 0 1-11.32 0l-56-56a8 8 0 0 1 11.32-11.32L96 188.69 218.34 66.34a8 8 0 0 1 11.32 11.32Z" />
@@ -61,6 +65,7 @@ export const Icons = {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 256 256"
       fill="currentColor"
+      className={cn('h-4 w-4', props.className)}
       {...props}
     >
       <path d="M216 32H88a8 8 0 0 0-8 8v40H40a8 8 0 0 0-8 8v128a8 8 0 0 0 8 8h128a8 8 0 0 0 8-8v-40h40a8 8 0 0 0 8-8V40a8 8 0 0 0-8-8Zm-56 176H48V96h112Zm48-48h-32V88a8 8 0 0 0-8-8H96V48h112Z" />
@@ -116,6 +121,159 @@ export const Icons = {
       {...props}
     >
       <path d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24Zm0 192a88 88 0 1 1 88-88 88.1 88.1 0 0 1-88 88Zm24-120h-48a8 8 0 0 0-8 8v48a8 8 0 0 0 8 8h48a8 8 0 0 0 8-8v-48a8 8 0 0 0-8-8Zm-8 48h-32v-32h32Z" />
+    </svg>
+  ),
+  externalLink: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      className={cn('h-4 w-4', props.className)}
+      viewBox="0 0 256 256"
+      {...props}
+    >
+      <path d="M224 104a8 8 0 0 1-16 0V59.32l-66.33 66.34a8 8 0 0 1-11.32-11.32L196.68 48H152a8 8 0 0 1 0-16h64a8 8 0 0 1 8 8Zm-40 24a8 8 0 0 0-8 8v72H48V80h72a8 8 0 0 0 0-16H48a16 16 0 0 0-16 16v128a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-72a8 8 0 0 0-8-8Z" />
+    </svg>
+  ),
+  sideBar: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+      fill="currentColor"
+      className={cn('h-4 w-4', props.className)}
+      {...props}
+    >
+      <path d="M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16ZM40 56h40v144H40Zm176 144H96V56h120v144Z" />
+    </svg>
+  ),
+  message: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+      fill="currentColor"
+      className={cn('h-4 w-4', props.className)}
+      {...props}
+    >
+      <path d="M216 48H40a16 16 0 0 0-16 16v160a15.84 15.84 0 0 0 9.25 14.5A16.05 16.05 0 0 0 40 240a15.89 15.89 0 0 0 10.25-3.78.69.69 0 0 0 .13-.11L82.5 208H216a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16ZM40 224Zm176-32H82.5a16 16 0 0 0-10.3 3.75l-.12.11L40 224V64h176Z" />
+    </svg>
+  ),
+  share: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      className={cn('h-4 w-4', props.className)}
+      viewBox="0 0 256 256"
+      {...props}
+    >
+      <path d="m237.66 106.35-80-80A8 8 0 0 0 144 32v40.35c-25.94 2.22-54.59 14.92-78.16 34.91-28.38 24.08-46.05 55.11-49.76 87.37a12 12 0 0 0 20.68 9.58c11-11.71 50.14-48.74 107.24-52V192a8 8 0 0 0 13.66 5.65l80-80a8 8 0 0 0 0-11.3ZM160 172.69V144a8 8 0 0 0-8-8c-28.08 0-55.43 7.33-81.29 21.8a196.17 196.17 0 0 0-36.57 26.52c5.8-23.84 20.42-46.51 42.05-64.86C99.41 99.77 127.75 88 152 88a8 8 0 0 0 8-8V51.32L220.69 112Z" />
+    </svg>
+  ),
+  trash: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+      fill="currentColor"
+      className={cn('h-4 w-4', props.className)}
+      {...props}
+    >
+      <path d="M216 48h-40v-8a24 24 0 0 0-24-24h-48a24 24 0 0 0-24 24v8H40a8 8 0 0 0 0 16h8v144a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16V64h8a8 8 0 0 0 0-16ZM96 40a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v8H96Zm96 168H64V64h128Zm-80-104v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0Zm48 0v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0Z" />
+    </svg>
+  ),
+  nextChat: ({
+    className,
+    inverted,
+    ...props
+  }: LucideProps & { inverted?: boolean }) => {
+    const id = nanoid()
+    return (
+      <svg
+        viewBox="0 0 17 17"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={cn('h-4 w-4', className)}
+        {...props}
+      >
+        <defs>
+          <linearGradient
+            id={`gradient-${id}-1`}
+            x1="10.6889"
+            y1="10.3556"
+            x2="13.8445"
+            y2="14.2667"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor={inverted ? 'white' : 'black'} />
+            <stop
+              offset={1}
+              stopColor={inverted ? 'white' : 'black'}
+              stopOpacity={0}
+            />
+          </linearGradient>
+          <linearGradient
+            id={`gradient-${id}-2`}
+            x1="11.7555"
+            y1="4.8"
+            x2="11.7376"
+            y2="9.50002"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor={inverted ? 'white' : 'black'} />
+            <stop
+              offset={1}
+              stopColor={inverted ? 'white' : 'black'}
+              stopOpacity={0}
+            />
+          </linearGradient>
+        </defs>
+        <path
+          d="M1 16L2.58314 11.2506C1.83084 9.74642 1.63835 8.02363 2.04013 6.39052C2.4419 4.75741 3.41171 3.32057 4.776 2.33712C6.1403 1.35367 7.81003 0.887808 9.4864 1.02289C11.1628 1.15798 12.7364 1.8852 13.9256 3.07442C15.1148 4.26363 15.842 5.83723 15.9771 7.5136C16.1122 9.18997 15.6463 10.8597 14.6629 12.224C13.6794 13.5883 12.2426 14.5581 10.6095 14.9599C8.97637 15.3616 7.25358 15.1692 5.74942 14.4169L1 16Z"
+          fill={inverted ? 'black' : 'white'}
+          stroke={inverted ? 'black' : 'white'}
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <mask
+          id="mask0_91_2047"
+          style={{ maskType: 'alpha' }}
+          maskUnits="userSpaceOnUse"
+          x={1}
+          y={0}
+          width={16}
+          height={16}
+        >
+          <circle cx={9} cy={8} r={8} fill={inverted ? 'black' : 'white'} />
+        </mask>
+        <g mask="url(#mask0_91_2047)">
+          <circle cx={9} cy={8} r={8} fill={inverted ? 'black' : 'white'} />
+          <path
+            d="M14.2896 14.0018L7.146 4.8H5.80005V11.1973H6.87681V6.16743L13.4444 14.6529C13.7407 14.4545 14.0231 14.2369 14.2896 14.0018Z"
+            fill={`url(#gradient-${id}-1)`}
+          />
+          <rect
+            x="11.2222"
+            y="4.8"
+            width="1.06667"
+            height="6.4"
+            fill={`url(#gradient-${id}-2)`}
+          />
+        </g>
+      </svg>
+    )
+  },
+  separator: (props: LucideProps) => (
+    <svg
+      fill="none"
+      shapeRendering="geometricPrecision"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={cn('h-4 w-4', props.className)}
+      {...props}
+    >
+      <path d="M16.88 3.549L7.12 20.451"></path>
     </svg>
   ),
 }

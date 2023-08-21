@@ -1,9 +1,9 @@
 import { nanoid } from '@/lib/utils'
-import Chat from '@/components/chat/main-chat'
+import { Chat } from '@/components/chat/main-chat'
 
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
-export default function IndexPage() {
+export default async function IndexPage() {
   const id = nanoid()
   return <Chat id={id} />
 }

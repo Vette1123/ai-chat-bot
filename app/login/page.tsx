@@ -6,8 +6,6 @@ import { LoginButton } from '@/components/login-button'
 
 export default async function SignInPage() {
   const session = await getServerSession(authOptions)
-  // redirect to home if user is already logged in
-  // console.log('session', session)
   if (session?.user) {
     redirect('/')
   }

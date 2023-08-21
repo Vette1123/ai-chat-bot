@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useRouter } from 'next/navigation'
 import { UseChatHelpers } from 'ai/react'
 import Textarea from 'react-textarea-autosize'
 
@@ -26,6 +27,7 @@ export function PromptForm({
 }: PromptProps) {
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
+  const router = useRouter()
 
   React.useEffect(() => {
     if (inputRef.current) {
@@ -51,8 +53,8 @@ export function PromptForm({
             <button
               onClick={(e) => {
                 e.preventDefault()
-                // router.refresh()
-                // router.push('/')
+                router.refresh()
+                router.push('/')
               }}
               className={cn(
                 buttonVariants({ size: 'sm', variant: 'outline' }),

@@ -1,11 +1,11 @@
 import React from 'react'
 import { type Message } from 'ai'
+import { getSession } from 'next-auth/react'
 
 import { cn } from '@/lib/utils'
-
-import { Icons } from '../icons'
-import MemorizedMarkDown from '../memorized-mark-down'
-import { ChatMessageActions } from './chat-message-actions'
+import { ChatMessageActions } from '@/components/chat/chat-message-actions'
+import { Icons } from '@/components/icons'
+import MemorizedMarkDown from '@/components/markdown/memorized-mark-down'
 
 export interface ChatMessageProps {
   message: Message
@@ -24,7 +24,7 @@ function ChatMessage({ message, ...props }: ChatMessageProps) {
       >
         {message.role === 'user' ? <Icons.user /> : <Icons.openAI />}
       </div>
-      <div className="flex1 ml-4 space-y-2 overflow-hidden px-1">
+      <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
         <MemorizedMarkDown message={message} />
         <ChatMessageActions message={message} />
       </div>

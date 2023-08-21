@@ -114,11 +114,7 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
             className="text-xs hover:bg-zinc-800 focus-visible:ring-1 focus-visible:ring-slate-700 focus-visible:ring-offset-0"
             onClick={onCopy}
           >
-            {isCopied ? (
-              <Icons.check className="h-4 w-4" />
-            ) : (
-              <Icons.copy className="h-4 w-4" />
-            )}
+            {isCopied ? <Icons.check /> : <Icons.copy />}
             <span className="sr-only">Copy code</span>
           </Button>
         </div>

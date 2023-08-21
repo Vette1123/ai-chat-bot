@@ -3,9 +3,8 @@ import { type Message } from 'ai'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 
-import { MemoizedReactMarkdown } from '@/components/markdown'
-
-import { CodeBlock } from './code-block'
+import { CodeBlock } from '@/components/markdown/code-block'
+import { MemoizedReactMarkdown } from '@/components/markdown/markdown'
 
 interface MemorizedMarkDownProps {
   message: Message
@@ -14,7 +13,7 @@ interface MemorizedMarkDownProps {
 function MemorizedMarkDown({ message }: MemorizedMarkDownProps) {
   return (
     <MemoizedReactMarkdown
-      className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 break-words"
+      className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
       remarkPlugins={[remarkGfm, remarkMath]}
       components={{
         p({ children }) {

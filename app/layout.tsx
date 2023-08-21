@@ -6,7 +6,7 @@ import { Providers } from '@/providers'
 import { siteConfig } from '@/config/site'
 import { fontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
-import { SiteHeader } from '@/components/site-header'
+import { Header } from '@/components/header'
 
 export const metadata: Metadata = {
   title: {
@@ -38,7 +38,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <Providers>
           <div className="flex min-h-screen flex-col">
-            <SiteHeader />
+            <Header />
             <main className="flex-1 flex-col bg-muted/30">{children}</main>
           </div>
         </Providers>
