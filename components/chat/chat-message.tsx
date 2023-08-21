@@ -1,6 +1,5 @@
 import React from 'react'
-import { type Message } from 'ai'
-import { getSession } from 'next-auth/react'
+import { Message } from 'ai'
 
 import { cn } from '@/lib/utils'
 import { ChatMessageActions } from '@/components/chat/chat-message-actions'

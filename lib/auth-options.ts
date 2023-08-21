@@ -14,9 +14,12 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, profile }) {
-      if (profile) {
+    async jwt({ token, profile, user }) {
+      if (profile && profile.id) {
         token.id = profile.id
+      }
+      if (user && user.id) {
+        token.id = user.id
       }
       return token
     },
