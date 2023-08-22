@@ -22,8 +22,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { Icons } from '@/components/icons'
-
-import ShareChatModal from '../modals/shareChat'
+import { useShareModal } from '@/components/modals/shareChat'
 
 interface SidebarActionsProps {
   chat: Chat
@@ -33,8 +32,8 @@ interface SidebarActionsProps {
 
 export function SidebarActions({ chat, removeChat }: SidebarActionsProps) {
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false)
-  const [shareDialogOpen, setShareDialogOpen] = React.useState(false)
   const [isRemovePending, startRemoveTransition] = React.useTransition()
+  const { ShareChatModal, setIsShareModalOpen } = useShareModal({ chat })
   const router = useRouter()
 
   return (
@@ -45,7 +44,7 @@ export function SidebarActions({ chat, removeChat }: SidebarActionsProps) {
             <Button
               variant="ghost"
               className="h-6 w-6 p-0 hover:bg-background"
-              onClick={() => setShareDialogOpen(true)}
+              onClick={() => setIsShareModalOpen(true)}
             >
               <Icons.share />
               <span className="sr-only">Share</span>
@@ -68,11 +67,7 @@ export function SidebarActions({ chat, removeChat }: SidebarActionsProps) {
           <TooltipContent>Delete chat</TooltipContent>
         </Tooltip>
       </div>
-      <ShareChatModal
-        chat={chat}
-        shareDialogOpen={shareDialogOpen}
-        setShareDialogOpen={setShareDialogOpen}
-      />
+      <ShareChatModal />
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>

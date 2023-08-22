@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import Link from 'next/link'
 import { toast } from 'sonner'
 
@@ -25,7 +25,7 @@ interface ShareChatModalProps {
   setShareDialogOpen: (open: boolean) => void
 }
 
-function ShareChatModal({
+function ShareChatModalHelper({
   chat,
   shareDialogOpen,
   setShareDialogOpen,
@@ -43,15 +43,15 @@ function ShareChatModal({
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-1 rounded-md border p-4 text-sm">
-          <div className="font-medium">{chat.title}</div>
+          <div className="font-medium">{chat?.title}</div>
           <div className="text-muted-foreground">
-            {formatDate(chat.createdAt)} · {chat.messages.length} messages
+            {formatDate(chat?.createdAt)} · {chat?.messages?.length} messages
           </div>
         </div>
         <DialogFooter className="items-center">
-          {chat.sharePath && (
+          {chat?.sharePath && (
             <Link
-              href={chat.sharePath}
+              href={chat?.sharePath}
               className={cn(badgeVariants({ variant: 'secondary' }), 'mr-auto')}
               target="_blank"
             >
@@ -63,7 +63,7 @@ function ShareChatModal({
             disabled={isSharePending}
             onClick={() => {
               startShareTransition(async () => {
-                if (chat.sharePath) {
+                if (chat?.sharePath) {
                   await new Promise((resolve) => setTimeout(resolve, 500))
                   copyShareLink(chat)
                   return
@@ -95,4 +95,22 @@ function ShareChatModal({
   )
 }
 
-export default ShareChatModal
+export function useShareModal({ chat }: { chat: Chat }) {
+  const [isShareModalOpen, setIsShareModalOpen] = React.useState(false)
+
+  const ShareChatModal = useCallback(
+    () => (
+      <ShareChatModalHelper
+        chat={chat}
+        shareDialogOpen={isShareModalOpen}
+        setShareDialogOpen={setIsShareModalOpen}
+      />
+    ),
+    [chat, isShareModalOpen, setIsShareModalOpen]
+  )
+
+  return useMemo(
+    () => ({ ShareChatModal, setIsShareModalOpen, isShareModalOpen }),
+    [ShareChatModal, setIsShareModalOpen, isShareModalOpen]
+  )
+}

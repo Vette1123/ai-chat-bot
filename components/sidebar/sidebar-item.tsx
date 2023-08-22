@@ -31,7 +31,7 @@ export function SidebarItem({ chat, children }: SidebarItemProps) {
           <Tooltip delayDuration={1000}>
             <TooltipTrigger
               tabIndex={-1}
-              className="focus:bg-muted focus:ring-ring focus:ring-1"
+              className="focus:bg-muted focus:ring-1 focus:ring-ring"
             >
               <Icons.user className="mr-2" />
             </TooltipTrigger>

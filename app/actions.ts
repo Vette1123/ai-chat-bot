@@ -31,7 +31,12 @@ export async function getChats(userId?: string | null) {
   }
 }
 
-export async function getChat(id: string, userId: string) {
+export async function getChat(id: string) {
+  const session = await getServerSession(authOptions)
+  const userId = session?.user?.id
+  if (!userId) {
+    return null
+  }
   const chat = await kv.hgetall<Chat>(`chat:${id}`)
 
   if (!chat || (userId && chat.userId !== userId)) {
