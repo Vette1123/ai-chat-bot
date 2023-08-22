@@ -39,7 +39,7 @@ export async function getChat(id: string) {
   }
   const chat = await kv.hgetall<Chat>(`chat:${id}`)
 
-  if (!chat || (userId && chat.userId !== userId)) {
+  if (!chat) {
     return null
   }
 
