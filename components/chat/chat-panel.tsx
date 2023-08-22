@@ -1,4 +1,5 @@
 import React from 'react'
+import { usePathname } from 'next/navigation'
 import { UseChatHelpers } from 'ai/react'
 
 import { Chat } from '@/types/chat'
@@ -7,7 +8,7 @@ import { ButtonScrollToBottom } from '@/components/button-scroll-to-bottom'
 import { FooterText } from '@/components/chat/chat-prompt-footer'
 import { PromptForm } from '@/components/chat/chat-prompt-form'
 import { Icons } from '@/components/icons'
-import { useShareModal } from '@/components/modals/shareChat'
+import { useShareModal } from '@/components/modals/share-chat-modal'
 import { getChat } from '@/app/actions'
 
 export interface ChatPanelProps
@@ -36,6 +37,8 @@ export function ChatPanel({
 }: ChatPanelProps) {
   const [chat, setChat] = React.useState<Chat>({} as Chat)
   const { setIsShareModalOpen, ShareChatModal } = useShareModal({ chat })
+  const pathname = usePathname()
+  const isHomePage = pathname === '/'
 
   return (
     <div className="fixed inset-x-0 bottom-0 shrink-0 bg-gradient-to-b from-muted/50 to-muted/80 to-50% pt-2">
@@ -62,20 +65,22 @@ export function ChatPanel({
                   <Icons.refresh className="mr-2 h-4 w-4" />
                   Regenerate response
                 </Button>
-                <Button
-                  variant="outline"
-                  onClick={async () => {
-                    const chat = await getChat(id!)
-                    if (chat) {
-                      setChat(chat)
-                      setIsShareModalOpen(true)
-                    }
-                  }}
-                  className="bg-background"
-                >
-                  <Icons.share className="mr-2 h-4 w-4" />
-                  Share
-                </Button>
+                {!isHomePage && (
+                  <Button
+                    variant="outline"
+                    onClick={async () => {
+                      const chat = await getChat(id!)
+                      if (chat) {
+                        setChat(chat)
+                        setIsShareModalOpen(true)
+                      }
+                    }}
+                    className="bg-background"
+                  >
+                    <Icons.share className="mr-2 h-4 w-4" />
+                    Share
+                  </Button>
+                )}
               </div>
             )
           )}

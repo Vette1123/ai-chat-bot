@@ -2,7 +2,6 @@
 
 import React from 'react'
 import { Message, useChat } from 'ai/react'
-import { toast } from 'sonner'
 
 import { cn } from '@/lib/utils'
 import ChatList from '@/components/chat/chat-list'
@@ -10,12 +9,15 @@ import { ChatPanel } from '@/components/chat/chat-panel'
 import { ChatScrollAnchor } from '@/components/chat/chat-scroll-anchor'
 import { EmptyScreen } from '@/components/empty-screen'
 
+import { useAlertModal } from '../modals/not-logged-in-modal'
+
 export interface ChatProps extends React.ComponentProps<'div'> {
   id?: string
   initialMessages?: Message[]
 }
 
 export function Chat({ id, initialMessages, className, ...props }: ChatProps) {
+  const { AlertModal, setOpen } = useAlertModal()
   const { messages, append, reload, stop, isLoading, input, setInput } =
     useChat({
       initialMessages,
@@ -25,7 +27,7 @@ export function Chat({ id, initialMessages, className, ...props }: ChatProps) {
       },
       onResponse(response) {
         if (response.status === 401) {
-          toast.error(response.statusText)
+          setOpen(true)
         }
       },
     })
@@ -51,6 +53,7 @@ export function Chat({ id, initialMessages, className, ...props }: ChatProps) {
         input={input}
         setInput={setInput}
       />
+      <AlertModal />
     </>
   )
 }

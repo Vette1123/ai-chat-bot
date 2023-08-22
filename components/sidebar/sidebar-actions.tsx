@@ -22,7 +22,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { Icons } from '@/components/icons'
-import { useShareModal } from '@/components/modals/shareChat'
+import { useShareModal } from '@/components/modals/share-chat-modal'
 
 interface SidebarActionsProps {
   chat: Chat
