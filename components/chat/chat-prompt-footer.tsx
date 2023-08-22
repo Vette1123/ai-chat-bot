@@ -7,7 +7,7 @@ export function FooterText({ className, ...props }: React.ComponentProps<'p'>) {
   return (
     <p
       className={cn(
-        'text-muted-foreground px-2 text-center text-xs leading-normal',
+        'px-2 text-center text-xs leading-normal text-muted-foreground',
         className
       )}
       {...props}
@@ -22,7 +22,14 @@ export function FooterText({ className, ...props }: React.ComponentProps<'p'>) {
         href="https://vercel.com/storage/kv"
       >
         Vercel KV
-      </ExternalLink>
+      </ExternalLink>{' '}
+      and{' '}
+      <ExternalLink
+        className="text-primary"
+        href="https://github.com/Vette1123"
+      >
+        Sadge
+      </ExternalLink>{' '}
       .
     </p>
   )

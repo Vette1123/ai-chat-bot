@@ -60,7 +60,7 @@ export function UserMenu({ user }: UserMenuProps) {
               className="inline-flex w-full items-center justify-between text-xs"
             >
               Home
-              <Icons.externalLink className="ml-auto h-3 w-3" />
+              <Icons.home className="ml-auto h-3 w-3" />
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>

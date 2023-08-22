@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth'
 
 import { authOptions } from '@/lib/auth-options'
-import { LoginButton } from '@/components/login-button'
+import { LoginCard } from '@/components/login-card'
 
 export default async function SignInPage() {
   const session = await getServerSession(authOptions)
@@ -10,8 +10,8 @@ export default async function SignInPage() {
     redirect('/')
   }
   return (
-    <div className="flex items-center justify-center py-10">
-      <LoginButton className="flex items-center justify-center" />
+    <div className="flex h-[calc(100vh-theme(spacing.16))] items-center justify-center py-10">
+      <LoginCard />
     </div>
   )
 }
