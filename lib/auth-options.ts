@@ -14,11 +14,11 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, profile, user }) {
-      if (profile && profile.id) {
+    async jwt({ token, profile, user, account }) {
+      if (profile && profile.id && account?.provider === 'github') {
         token.id = profile.id
       }
-      if (user && user.id) {
+      if (user && user.id && account?.provider === 'google') {
         token.id = user.id
       }
       return token

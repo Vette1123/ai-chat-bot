@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 
@@ -51,6 +52,17 @@ export function UserMenu({ user }: UserMenuProps) {
             <div className="text-xs text-zinc-500">{user?.email}</div>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
+          <DropdownMenuItem asChild>
+            <Link
+              href="/"
+              target="_self"
+              rel="noopener noreferrer"
+              className="inline-flex w-full items-center justify-between text-xs"
+            >
+              Home
+              <Icons.externalLink className="ml-auto h-3 w-3" />
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <a
               href="https://vercel.com"
