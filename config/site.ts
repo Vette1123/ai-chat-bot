@@ -43,5 +43,6 @@ export const siteConfig = {
     'Next.js',
     'NextJS',
     'Next.js Developer',
+    'Next.js Engineer',
   ],
 }
