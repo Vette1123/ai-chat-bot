@@ -55,11 +55,13 @@ export async function POST(req: Request) {
           },
         ],
       }
-      await redis.hmset(`chat:${id}`, payload)
-      await redis.zadd(`user:chat:${userId}`, {
+      const hmset = await redis.hmset(`chat:${id}`, payload)
+      console.log('hmset', hmset)
+      const zadd = await redis.zadd(`user:chat:${userId}`, {
         score: createdAt,
         member: `chat:${id}`,
       })
+      console.log('zadd', zadd)
     },
   })
 

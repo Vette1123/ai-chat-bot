@@ -14,12 +14,12 @@ const exampleMessages = [
   {
     heading: 'Summarize an article',
     message: 'Summarize a cool article for a 2nd grader, be precise',
-    disabled: true,
+    disabled: false,
   },
   {
     heading: 'Draft an email',
     message: 'Draft an email about the new product launch',
-    disabled: true,
+    disabled: false,
   },
 ]
 
