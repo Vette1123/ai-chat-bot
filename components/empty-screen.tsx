@@ -8,15 +8,15 @@ import { Icons } from './icons'
 const exampleMessages = [
   {
     heading: 'Explain technical concepts',
-    message: `What is a "serverless function"?`,
+    message: 'What is a serverless function?',
   },
   {
     heading: 'Summarize an article',
-    message: 'Summarize the following article for a 2nd grader: \n',
+    message: 'Summarize a cool article for a 2nd grader, be precise',
   },
   {
     heading: 'Draft an email',
-    message: `Draft an email to my boss about the following: \n`,
+    message: 'Draft an email about the new product launch',
   },
 ]
 
