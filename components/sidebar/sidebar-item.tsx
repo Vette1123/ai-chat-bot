@@ -25,8 +25,8 @@ export function SidebarItem({ chat, children }: SidebarItemProps) {
   if (!chat?.id) return null
 
   return (
-    <div className="relative">
-      <div className="absolute left-2 top-1 flex h-6 w-6 items-center justify-center">
+    <div className="relative flex items-center">
+      <div className="absolute left-2 flex h-6 w-6 items-center justify-center">
         {chat.sharePath ? (
           <Tooltip delayDuration={1000}>
             <TooltipTrigger
@@ -56,7 +56,7 @@ export function SidebarItem({ chat, children }: SidebarItemProps) {
           <span className="whitespace-nowrap">{chat.title}</span>
         </div>
       </Link>
-      {isActive && <div className="absolute right-2 top-1">{children}</div>}
+      {isActive && <div className="absolute right-2">{children}</div>}
     </div>
   )
 }
