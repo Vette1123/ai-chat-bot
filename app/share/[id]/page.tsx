@@ -1,6 +1,8 @@
 import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { getServerSession } from 'next-auth'
 
+import { authOptions } from '@/lib/auth-options'
 import { formatDate } from '@/lib/utils'
 import ChatList from '@/components/chat/chat-list'
 import { FooterText } from '@/components/chat/chat-prompt-footer'
@@ -18,6 +20,11 @@ interface SharePageProps {
 export async function generateMetadata({
   params,
 }: SharePageProps): Promise<Metadata> {
+  const session = await getServerSession(authOptions)
+
+  if (!session?.user) {
+    return {}
+  }
   const chat = await getSharedChat(params.id)
 
   return {

@@ -18,6 +18,11 @@ export interface ChatPageProps {
 export async function generateMetadata({
   params,
 }: ChatPageProps): Promise<Metadata> {
+  const session = await getServerSession(authOptions)
+
+  if (!session?.user) {
+    return {}
+  }
   const chat = await getChat(params.id)
   return {
     title: chat?.title.toString().slice(0, 50) ?? 'Chat',
