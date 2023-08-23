@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { UseChatHelpers } from 'ai/react'
-import { useSession } from 'next-auth/react'
 import Textarea from 'react-textarea-autosize'
 
 import { cn } from '@/lib/utils'
@@ -18,7 +17,6 @@ export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
   onSubmit: (value: string) => Promise<void>
   isLoading: boolean
-  id?: string
 }
 
 export function PromptForm({
@@ -26,12 +24,9 @@ export function PromptForm({
   input,
   setInput,
   isLoading,
-  id,
 }: PromptProps) {
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
-  const userId = useSession()?.data?.user?.id
-  const isHomePage = usePathname() === '/'
   const router = useRouter()
 
   React.useEffect(() => {
@@ -49,10 +44,6 @@ export function PromptForm({
         }
         setInput('')
         await onSubmit(input)
-        if (isHomePage && userId) {
-          router.refresh()
-          router.push(`/chat/${id}`)
-        }
       }}
       ref={formRef}
     >
