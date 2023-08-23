@@ -26,6 +26,7 @@ export function Chat({ id, initialMessages, className, ...props }: ChatProps) {
         id,
       },
       onResponse(response) {
+        console.error('error', response)
         if (response.status === 401) {
           setOpen(true)
         }
