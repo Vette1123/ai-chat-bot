@@ -9,14 +9,17 @@ const exampleMessages = [
   {
     heading: 'Explain technical concepts',
     message: 'What is a serverless function?',
+    disabled: false,
   },
   {
     heading: 'Summarize an article',
     message: 'Summarize a cool article for a 2nd grader, be precise',
+    disabled: true,
   },
   {
     heading: 'Draft an email',
     message: 'Draft an email about the new product launch',
+    disabled: true,
   },
 ]
 
@@ -49,8 +52,9 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
             <Button
               key={index}
               variant="link"
+              disabled={message.disabled}
               className="h-auto p-0 text-base"
-              onClick={() => setInput(message.message)}
+              onClick={() => !message.disabled && setInput(message.message)}
             >
               <Icons.arrowRight className="mr-2 h-4 w-4 text-muted-foreground" />
               {message.heading}
