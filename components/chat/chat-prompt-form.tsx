@@ -47,10 +47,10 @@ export function PromptForm({
         }
         setInput('')
         await onSubmit(input)
-        // if (isHomePage) {
-        //   router.refresh()
-        //   router.push(`/chat/${id}`)
-        // }
+        if (isHomePage) {
+          router.refresh()
+          router.push(`/chat/${id}`)
+        }
       }}
       ref={formRef}
     >

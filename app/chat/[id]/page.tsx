@@ -7,7 +7,7 @@ import { Chat } from '@/components/chat/main-chat'
 import { getChat } from '@/app/actions'
 
 // export const runtime = 'edge'
-export const preferredRegion = 'home'
+// export const preferredRegion = 'home'
 
 export interface ChatPageProps {
   params: {
@@ -18,12 +18,6 @@ export interface ChatPageProps {
 export async function generateMetadata({
   params,
 }: ChatPageProps): Promise<Metadata> {
-  const session = await getServerSession(authOptions)
-
-  if (!session?.user) {
-    return {}
-  }
-
   const chat = await getChat(params.id)
   return {
     title: chat?.title.toString().slice(0, 50) ?? 'Chat',
@@ -43,9 +37,9 @@ export default async function ChatPage({ params }: ChatPageProps) {
     notFound()
   }
 
-  if (chat?.userId !== session?.user?.id) {
-    notFound()
-  }
+  // if (chat?.userId !== session?.user?.id) {
+  //   notFound()
+  // }
 
   return <Chat id={chat.id} initialMessages={chat.messages} />
 }
