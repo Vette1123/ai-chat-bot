@@ -33,11 +33,12 @@ export function Chat({ id, initialMessages, className, ...props }: ChatProps) {
           setOpen(true)
         }
       },
-      onFinish() {
-        if (isHomePage && !error) {
-          router.refresh()
-          router.push(`/chat/${id}`)
-        }
+      onFinish(message) {
+        console.log('onFinish', message)
+        // if (isHomePage && !error) {
+        //   router.refresh()
+        //   router.push(`/chat/${id}`)
+        // }
       },
     })
   return (
