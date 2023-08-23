@@ -2,11 +2,11 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { kv } from '@vercel/kv'
 import { getServerSession } from 'next-auth'
 
 import { type Chat } from '@/types/chat'
 import { authOptions } from '@/lib/auth-options'
+import { redis } from '@/lib/upstash-redis'
 
 export async function getChats(userId?: string | null) {
   if (!userId) {
@@ -14,8 +14,8 @@ export async function getChats(userId?: string | null) {
   }
 
   try {
-    const pipeline = kv.pipeline()
-    const chats: string[] = await kv.zrange(`user:chat:${userId}`, 0, -1, {
+    const pipeline = redis.pipeline()
+    const chats: string[] = await redis.zrange(`user:chat:${userId}`, 0, -1, {
       rev: true,
     })
 
@@ -37,7 +37,7 @@ export async function getChat(id: string) {
   if (!userId) {
     return null
   }
-  const chat = await kv.hgetall<Chat>(`chat:${id}`)
+  const chat = await redis.hgetall<Chat>(`chat:${id}`)
 
   if (!chat) {
     return null
@@ -55,16 +55,8 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
     }
   }
 
-  const uid = await kv.hget<string>(`chat:${id}`, 'userId')
-
-  if (uid !== session?.user?.id) {
-    return {
-      error: 'Unauthorized',
-    }
-  }
-
-  await kv.del(`chat:${id}`)
-  await kv.zrem(`user:chat:${session.user.id}`, `chat:${id}`)
+  await redis.del(`chat:${id}`)
+  await redis.zrem(`user:chat:${session.user.id}`, `chat:${id}`)
 
   revalidatePath('/')
   return revalidatePath(path)
@@ -79,11 +71,15 @@ export async function clearChats() {
     }
   }
 
-  const chats: string[] = await kv.zrange(`user:chat:${session.user.id}`, 0, -1)
+  const chats: string[] = await redis.zrange(
+    `user:chat:${session.user.id}`,
+    0,
+    -1
+  )
   if (!chats.length) {
     return redirect('/')
   }
-  const pipeline = kv.pipeline()
+  const pipeline = redis.pipeline()
 
   for (const chat of chats) {
     pipeline.del(chat)
@@ -97,7 +93,7 @@ export async function clearChats() {
 }
 
 export async function getSharedChat(id: string) {
-  const chat = await kv.hgetall<Chat>(`chat:${id}`)
+  const chat = await redis.hgetall<Chat>(`chat:${id}`)
 
   if (!chat || !chat.sharePath) {
     return null
@@ -120,7 +116,7 @@ export async function shareChat(chat: Chat) {
     sharePath: `/share/${chat.id}`,
   }
 
-  await kv.hmset(`chat:${chat.id}`, payload)
+  await redis.hmset(`chat:${chat.id}`, payload)
 
   return payload
 }

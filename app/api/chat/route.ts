@@ -1,9 +1,9 @@
-import { kv } from '@vercel/kv'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
 import { getServerSession } from 'next-auth'
 import { Configuration, OpenAIApi } from 'openai-edge'
 
 import { authOptions } from '@/lib/auth-options'
+import { redis } from '@/lib/upstash-redis'
 import { nanoid } from '@/lib/utils'
 
 const configuration = new Configuration({
@@ -55,8 +55,8 @@ export async function POST(req: Request) {
           },
         ],
       }
-      await kv.hmset(`chat:${id}`, payload)
-      await kv.zadd(`user:chat:${userId}`, {
+      await redis.hmset(`chat:${id}`, payload)
+      await redis.zadd(`user:chat:${userId}`, {
         score: createdAt,
         member: `chat:${id}`,
       })

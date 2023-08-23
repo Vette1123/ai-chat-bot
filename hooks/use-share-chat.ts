@@ -17,10 +17,10 @@ export const useCopyShareLink = (
     setShareDialogOpen(false)
     toast.success('Share link copied to clipboard', {
       style: {
-        borderRadius: '10px',
         background: '#333',
         color: '#fff',
-        fontSize: '14px',
+        borderRadius: '8px',
+        borderColor: '#333',
       },
     })
   }, [])
