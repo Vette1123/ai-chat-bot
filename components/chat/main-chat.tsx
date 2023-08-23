@@ -35,10 +35,10 @@ export function Chat({ id, initialMessages, className, ...props }: ChatProps) {
       },
       onFinish(message) {
         console.log('onFinish', message)
-        // if (isHomePage && !error) {
-        //   router.refresh()
-        //   router.push(`/chat/${id}`)
-        // }
+        if (isHomePage && !error) {
+          router.refresh()
+          router.push(`/chat/${id}`)
+        }
       },
     })
   return (
