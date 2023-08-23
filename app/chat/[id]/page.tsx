@@ -1,13 +1,12 @@
-import { type Metadata } from 'next'
-import { notFound, redirect } from 'next/navigation'
-import { getServerSession } from 'next-auth'
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { auth } from '@/auth'
 
-import { authOptions } from '@/lib/auth-options'
 import { Chat } from '@/components/chat/main-chat'
 import { getChat } from '@/app/actions'
 
-// export const runtime = 'edge'
-// export const preferredRegion = 'home'
+export const runtime = 'edge'
+export const preferredRegion = 'home'
 
 export interface ChatPageProps {
   params: {
@@ -18,7 +17,7 @@ export interface ChatPageProps {
 export async function generateMetadata({
   params,
 }: ChatPageProps): Promise<Metadata> {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   if (!session?.user) {
     return {}
@@ -30,7 +29,7 @@ export async function generateMetadata({
 }
 
 export default async function ChatPage({ params }: ChatPageProps) {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   if (!session?.user) {
     // redirect(`/login?next=/chat/${params.id}`)

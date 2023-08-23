@@ -1,9 +1,8 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { getServerSession } from 'next-auth'
+import { auth } from '@/auth'
 
 import { siteConfig } from '@/config/site'
-import { authOptions } from '@/lib/auth-options'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Icons } from '@/components/icons'
 import { Sidebar } from '@/components/sidebar/sidebar'
@@ -16,7 +15,7 @@ import { clearChats } from '@/app/actions'
 import { ThemeToggle } from './theme-toggle'
 
 export async function Header() {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
   return (
     <header className="sticky top-0 z-50 flex h-16 w-full shrink-0 items-center justify-between overflow-hidden border-b bg-gradient-to-b from-background/10 via-background/50 to-background/80 px-4 backdrop-blur-xl">
       <div className="flex items-center">

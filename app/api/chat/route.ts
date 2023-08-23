@@ -1,8 +1,7 @@
+import { auth } from '@/auth'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
-import { getServerSession } from 'next-auth'
 import { Configuration, OpenAIApi } from 'openai-edge'
 
-import { authOptions } from '@/lib/auth-options'
 import { redis } from '@/lib/upstash-redis'
 import { nanoid } from '@/lib/utils'
 
@@ -12,11 +11,12 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration)
 
+export const runtime = 'edge'
+
 export async function POST(req: Request) {
   const json = await req.json()
   const { messages, previewToken } = json
-  const session = await getServerSession(authOptions)
-  const userId = session?.user?.id
+  const userId = (await auth())?.user.id
 
   if (!userId) {
     return new Response('Unauthorized', {

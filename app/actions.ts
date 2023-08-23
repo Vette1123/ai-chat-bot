@@ -2,10 +2,9 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { getServerSession } from 'next-auth'
+import { auth } from '@/auth'
 
 import { type Chat } from '@/types/chat'
-import { authOptions } from '@/lib/auth-options'
 import { redis } from '@/lib/upstash-redis'
 
 export async function getChats(userId?: string | null) {
@@ -32,7 +31,7 @@ export async function getChats(userId?: string | null) {
 }
 
 export async function getChat(id: string) {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
   const userId = session?.user?.id
   if (!userId) {
     return null
@@ -47,7 +46,7 @@ export async function getChat(id: string) {
 }
 
 export async function removeChat({ id, path }: { id: string; path: string }) {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   if (!session) {
     return {
@@ -63,7 +62,7 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
 }
 
 export async function clearChats() {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   if (!session?.user?.id) {
     return {
@@ -103,7 +102,7 @@ export async function getSharedChat(id: string) {
 }
 
 export async function shareChat(chat: Chat) {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   if (!session?.user?.id || session.user.id !== chat.userId) {
     return {

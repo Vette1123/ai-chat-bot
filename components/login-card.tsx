@@ -51,7 +51,7 @@ export function LoginCard() {
             )}
             Github
           </Button>
-          <Button
+          {/* <Button
             variant="outline"
             onClick={() => {
               updateLoadingStates({ isGoogleLoading: true })
@@ -65,7 +65,7 @@ export function LoginCard() {
               <Icons.google className="mr-2 h-6 w-6" />
             )}
             Google
-          </Button>
+          </Button> */}
         </div>
       </CardContent>
       <CardFooter>
