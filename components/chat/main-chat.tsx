@@ -9,8 +9,7 @@ import ChatList from '@/components/chat/chat-list'
 import { ChatPanel } from '@/components/chat/chat-panel'
 import { ChatScrollAnchor } from '@/components/chat/chat-scroll-anchor'
 import { EmptyScreen } from '@/components/empty-screen'
-
-import { useAlertModal } from '../modals/not-logged-in-modal'
+import { useAlertModal } from '@/components/modals/not-logged-in-modal'
 
 export interface ChatProps extends React.ComponentProps<'div'> {
   id?: string
@@ -33,8 +32,7 @@ export function Chat({ id, initialMessages, className, ...props }: ChatProps) {
           setOpen(true)
         }
       },
-      onFinish(message) {
-        console.log('onFinish', message)
+      onFinish() {
         if (isHomePage && !error) {
           router.refresh()
           router.push(`/chat/${id}`)

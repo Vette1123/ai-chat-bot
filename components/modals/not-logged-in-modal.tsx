@@ -30,7 +30,7 @@ function NotLoggedInAlert({ open, setOpen }: NotLoggedInAlertProps) {
         <AlertDialogHeader>
           <AlertDialogTitle>You&apos;re not logged in!</AlertDialogTitle>
           <AlertDialogDescription>
-            You need to be logged in to chat with our ai. If you don&apos;t have
+            You need to be logged in to chat with our AI. If you don&apos;t have
             an account, you can create one for free.
           </AlertDialogDescription>
         </AlertDialogHeader>

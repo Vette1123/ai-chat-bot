@@ -2,17 +2,22 @@ import NextAuth from 'next-auth'
 import GitHub from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
 
+// its only used this way, not in @lib/auth-options.ts to support vercel edge functions
 export const {
   handlers: { GET, POST },
   auth,
-  CSRF_experimental, // will be removed in future
 } = NextAuth({
+  // didn't provide a secret, so it will be generated automatically ( when the secrets in .env files 
+  // starts with AUTH_ keyword )
   providers: [GitHub, Google],
   callbacks: {
-    jwt({ token, profile,account,user,session, }) {
+    jwt({ token, profile }) {
       if (profile) {
         token.id = profile.id
         token.profile = profile.picture
+        if(!profile.id){
+          token.id = profile.sub
+        }
       }
       return token
     },
