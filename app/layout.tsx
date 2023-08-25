@@ -76,10 +76,27 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={cn('bg-background font-sans antialiased', fontSans.variable)}
       >
+        <div
+          style={{
+            position: 'fixed',
+            zIndex: 9999,
+            top: 16,
+            left: 16,
+            right: 16,
+            bottom: 16,
+            pointerEvents: 'none',
+          }}
+        />
         <Providers>
           <div className="flex min-h-screen flex-col">
             <Header />
-            <main className="flex-1 flex-col bg-muted/30">{children}</main>
+            <main className="flex-1 flex-col bg-muted/30">
+              <div className="relative flex h-[calc(100vh_-_theme(spacing.16))] overflow-hidden">
+                <div className="group w-full overflow-auto pl-0 duration-300 animate-in">
+                  {children}
+                </div>
+              </div>
+            </main>
           </div>
         </Providers>
       </body>
