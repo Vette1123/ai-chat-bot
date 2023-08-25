@@ -17,7 +17,7 @@ export interface ChatProps extends React.ComponentProps<'div'> {
 }
 
 export function Chat({ id, initialMessages, className, ...props }: ChatProps) {
-  const { AlertModal, setOpen, isGuest } = useAlertModal()
+  const { AlertModal, setIsAlertModalOpen, isGuest } = useAlertModal()
   const isHomePage = usePathname() === '/'
   const router = useRouter()
   const { messages, append, reload, stop, isLoading, input, setInput, error } =
@@ -30,10 +30,13 @@ export function Chat({ id, initialMessages, className, ...props }: ChatProps) {
       },
       onResponse(response) {
         if (response.status === 401) {
-          setOpen(true)
+          setIsAlertModalOpen(true)
         }
       },
       onFinish() {
+        if (messages.length) {
+          setInput('')
+        }
         if (isHomePage && !error && !isGuest) {
           router.refresh()
           router.push(`/chat/${id}`)

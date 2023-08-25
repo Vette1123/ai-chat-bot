@@ -18,21 +18,21 @@ import { Icons } from '@/components/icons'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 
 interface NotLoggedInAlertProps {
-  open: boolean
-  setOpen: (open: boolean) => void
+  isAlertModalOpen: boolean
+  setIsAlertModalOpen: (isAlertModalOpen: boolean) => void
   setIsGuest: (isGuest: boolean) => void
 }
 
 function NotLoggedInAlert({
-  open,
-  setOpen,
+  isAlertModalOpen,
+  setIsAlertModalOpen,
   setIsGuest,
 }: NotLoggedInAlertProps) {
   const [isPending, startTransition] = React.useTransition()
   const router = useRouter()
 
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
+    <AlertDialog open={isAlertModalOpen} onOpenChange={setIsAlertModalOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>You&apos;re not logged in!</AlertDialogTitle>
@@ -50,7 +50,7 @@ function NotLoggedInAlert({
                 onClick={() => {
                   startTransition(async () => {
                     setIsGuest(true)
-                    setOpen(false)
+                    setIsAlertModalOpen(false)
                   })
                 }}
               >
@@ -80,17 +80,27 @@ function NotLoggedInAlert({
 }
 
 export const useAlertModal = () => {
-  const [open, setOpen] = React.useState(false)
+  const [isAlertModalOpen, setIsAlertModalOpen] = React.useState(false)
   const [isGuest, setIsGuest] = React.useState(false)
 
   const AlertModal = React.useCallback(() => {
     return (
-      <NotLoggedInAlert open={open} setOpen={setOpen} setIsGuest={setIsGuest} />
+      <NotLoggedInAlert
+        isAlertModalOpen={isAlertModalOpen}
+        setIsAlertModalOpen={setIsAlertModalOpen}
+        setIsGuest={setIsGuest}
+      />
     )
-  }, [open, setOpen])
+  }, [isAlertModalOpen, setIsAlertModalOpen])
 
   return React.useMemo(
-    () => ({ AlertModal, setOpen, open, setIsGuest, isGuest }),
-    [AlertModal, setOpen, open, setIsGuest, isGuest]
+    () => ({
+      AlertModal,
+      setIsAlertModalOpen,
+      isAlertModalOpen,
+      setIsGuest,
+      isGuest,
+    }),
+    [AlertModal, setIsAlertModalOpen, isAlertModalOpen, setIsGuest, isGuest]
   )
 }
