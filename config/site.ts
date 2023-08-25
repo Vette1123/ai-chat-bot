@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: 'Sadge',
+  name: 'Sadge Chat - Natural Conversational AI',
   description:
     'Mohamed Gado is a software engineer who builds accessible, inclusive products and digital experiences for the web.',
   mainNav: [
