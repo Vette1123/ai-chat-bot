@@ -15,10 +15,10 @@ export const runtime = 'edge'
 
 export async function POST(req: Request) {
   const json = await req.json()
-  const { messages, previewToken } = json
+  const { messages, previewToken, isGuest } = json
   const userId = (await auth())?.user.id
 
-  if (!userId) {
+  if (!userId && !isGuest) {
     return new Response('Unauthorized', {
       status: 401,
     })
@@ -55,11 +55,13 @@ export async function POST(req: Request) {
           },
         ],
       }
-      await redis.hmset(`chat:${id}`, payload)
-      await redis.zadd(`user:chat:${userId}`, {
-        score: createdAt,
-        member: `chat:${id}`,
-      })
+      if (!isGuest) {
+        await redis.hmset(`chat:${id}`, payload)
+        await redis.zadd(`user:chat:${userId}`, {
+          score: createdAt,
+          member: `chat:${id}`,
+        })
+      }
     },
   })
 
