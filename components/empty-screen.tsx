@@ -8,24 +8,24 @@ import { Icons } from './icons'
 const exampleMessages = [
   {
     heading: 'Explain technical concepts',
-    message: 'What is a serverless function?',
+    message: `What is a "serverless function?"`,
     disabled: false,
   },
   {
     heading: 'Summarize an article',
-    message: 'Summarize a cool article for a 2nd grader, be precise',
+    message: `Summarize the article "How to Build a Chatbot in 3 Steps"`,
     disabled: false,
   },
   {
     heading: 'Draft an email',
-    message: 'Draft an email about the new product launch',
+    message: 'Draft an email about frontend position at Vercel',
     disabled: false,
   },
 ]
 
 export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   return (
-    <div className="mx-auto max-w-2xl px-4">
+    <div className="mx-auto max-w-3xl px-4">
       <div className="rounded-lg border bg-background p-8">
         <h1 className="mb-2 text-lg font-semibold">
           Welcome to Sadge AI Chatbot!
