@@ -45,11 +45,10 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: '/favicon.ico',
-    shortcut: '/favicon-96x96.png',
+    shortcut: '/favicon-32x32.png',
     apple: '/apple-touch-icon.png',
-    hash: '/safari-pinned-tab.svg',
     hostname: '/browserconfig.xml',
-    username: '/manifest.json',
+    username: '/site.webmanifest',
   },
   publisher: siteConfig.links.github,
   applicationName: siteConfig.name,
