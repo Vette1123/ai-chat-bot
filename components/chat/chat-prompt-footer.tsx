@@ -17,20 +17,17 @@ export function FooterText({ className, ...props }: React.ComponentProps<'p'>) {
         Next.js
       </ExternalLink>{' '}
       and{' '}
+      <ExternalLink className="text-primary" href="https://upstash.com">
+        Upstash Redis
+      </ExternalLink>{' '}
+      by{' '}
       <ExternalLink
         className="text-primary"
-        href="https://vercel.com/storage/kv"
+        href="https://www.mohamedgado.info"
       >
-        Vercel KV
+        yours
       </ExternalLink>{' '}
-      and{' '}
-      <ExternalLink
-        className="text-primary"
-        href="https://github.com/Vette1123"
-      >
-        Sadge
-      </ExternalLink>{' '}
-      .
+      truly.
     </p>
   )
 }

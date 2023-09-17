@@ -25,6 +25,15 @@ export async function Header() {
               <SidebarList userId={session?.user?.id} />
             </React.Suspense>
             <SidebarFooter>
+              <Button variant="link">
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://www.mohamedgado.info"
+                >
+                  Portfolio
+                </Link>
+              </Button>
               <ClearHistory clearChats={clearChats} />
             </SidebarFooter>
           </Sidebar>

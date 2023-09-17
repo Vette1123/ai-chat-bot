@@ -36,11 +36,8 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
             Next.js
           </ExternalLink>{' '}
           and{' '}
-          <ExternalLink
-            href="https://vercel.com/storage/kv"
-            className="text-primary"
-          >
-            Vercel KV
+          <ExternalLink href="https://upstash.com" className="text-primary">
+            Upstash Redis
           </ExternalLink>
           .
         </p>
