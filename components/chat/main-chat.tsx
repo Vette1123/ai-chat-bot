@@ -11,6 +11,8 @@ import { ChatScrollAnchor } from '@/components/chat/chat-scroll-anchor'
 import { EmptyScreen } from '@/components/empty-screen'
 import { useAlertModal } from '@/components/modals/not-logged-in-modal'
 
+export const runtime = 'edge'
+
 export interface ChatProps extends React.ComponentProps<'div'> {
   id?: string
   initialMessages?: Message[]
