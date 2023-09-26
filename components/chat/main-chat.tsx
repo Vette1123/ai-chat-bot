@@ -65,7 +65,7 @@ export function Chat({ id, initialMessages, className, ...props }: ChatProps) {
         input={input}
         setInput={setInput}
       />
-      {/* <AlertModal /> */}
+      <AlertModal />
     </>
   )
 }
