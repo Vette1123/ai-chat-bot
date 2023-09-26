@@ -1,59 +1,15 @@
-import * as React from 'react'
 import Link from 'next/link'
-import { auth } from '@/auth'
 
 import { siteConfig } from '@/config/site'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
+import { HeaderUpperSection } from '@/components/header-upper-section'
 import { Icons } from '@/components/icons'
-import { Sidebar } from '@/components/sidebar/sidebar'
-import { ClearHistory } from '@/components/sidebar/sidebar-clear-history'
-import { SidebarFooter } from '@/components/sidebar/sidebar-footer'
-import { SidebarList } from '@/components/sidebar/sidebar-list'
-import { UserMenu } from '@/components/user-menu'
-import { clearChats } from '@/app/actions'
+import { ThemeToggle } from '@/components/theme-toggle'
 
-import { ThemeToggle } from './theme-toggle'
-
-export async function Header() {
-  const session = await auth()
+export function Header() {
   return (
     <header className="sticky top-0 z-50 flex h-16 w-full shrink-0 items-center justify-between overflow-hidden border-b bg-gradient-to-b from-background/10 via-background/50 to-background/80 px-4 backdrop-blur-xl">
-      <div className="flex items-center">
-        {session?.user ? (
-          <Sidebar>
-            <React.Suspense fallback={<div className="flex-1 overflow-auto" />}>
-              <SidebarList userId={session?.user?.id} />
-            </React.Suspense>
-            <SidebarFooter>
-              <Button variant="link">
-                <Link
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://www.mohamedgado.info"
-                >
-                  Portfolio
-                </Link>
-              </Button>
-              <ClearHistory clearChats={clearChats} />
-            </SidebarFooter>
-          </Sidebar>
-        ) : (
-          <Link href="/" target="_blank" rel="nofollow">
-            <Icons.nextChat className="mr-2 h-6 w-6 dark:hidden" inverted />
-            <Icons.nextChat className="mr-2 hidden h-6 w-6 dark:block" />
-          </Link>
-        )}
-        <div className="flex items-center">
-          <Icons.separator className="h-6 w-6 text-muted-foreground/50" />
-          {session?.user ? (
-            <UserMenu user={session.user} />
-          ) : (
-            <Button variant="link" asChild className="-ml-2">
-              <Link href="/login?callbackUrl=/">Login</Link>
-            </Button>
-          )}
-        </div>
-      </div>
+      <HeaderUpperSection />
       <div>
         <Link href={siteConfig.links.github} target="_blank" rel="noreferrer">
           <div

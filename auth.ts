@@ -15,7 +15,7 @@ export const {
       if (profile) {
         token.id = profile.id
         token.profile = profile.picture
-        if(!profile.id){
+        if (!profile.id) {
           token.id = profile.sub
         }
       }
